@@ -35,10 +35,6 @@ const repelia = async()=>{
 
 }
 
-console.log(cargarPeliculas())
-
-console.log(repelia())
-
 
 
 router.get('/', async (req,res)=>{
@@ -58,7 +54,7 @@ router.get('/', async (req,res)=>{
         attributes: ["name"], 
         raw : true,
     })
-    const dbnames = await db.filter((r) => r.name)
+    const dbnames = await db.map((r) => r.name)
 
  res.status(200).json(dbnames)
    }catch(error){

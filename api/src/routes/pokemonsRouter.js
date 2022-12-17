@@ -11,14 +11,12 @@ const getApiData = async()=>{
  
  if(apiData.status===200){
 	const datos = await apiData.data.results
-	// console.log(apiData.data.results)
 	let rawdata = datos
 	for(let i=0; i < rawdata.length;i++){
      if(!rawdata[i]) return stadarization
     if(rawdata[i].url){
      const pokemonaxios = await axios.get(rawdata[i].url)
      const pokemondata = pokemonaxios.data
-	 console.log(pokemondata)
 	 stadarization.push({
      id: pokemondata.id,
 	 name: pokemondata.name,
@@ -40,7 +38,6 @@ const getApiData = async()=>{
 const getDbData = async()=>{
 try{
 let pokedb =await  Pokemon.findAll()
-console.log(pokedb)
 return pokedb
 }catch(error){ return error.message}
 
@@ -59,20 +56,34 @@ let api = await getApiData()
 }
 
 
-router.get('/',async(req,res)=>{
+// router.get('/',async(req,res)=>{
 
-try{
-	let pokedex = await allPokemons()
-	res.status(200).send(pokedex)
+// try{
+// 	let pokedex = await allPokemons()
+// 	res.status(200).send(pokedex)
      
-}catch(error){
-res.status(400).send(error.message)
+// }catch(error){
+// res.status(400).send(error.message)
 
-}
+// }
 
 
-})
-
+// })
+router.get('/',async(req,res)=>{
+	const{name}= req.query
+	try{
+		let pokedex = await allPokemons()
+		if(name){
+		
+		let findname = pokedex.filter(item => item.name.toLowerCase().includes(name.toLowerCase()))
+	findname.length ? res.status(200).send(findname) : res.status(404).send("Pokemon not found!")
+		} else{ res.status(200).send(pokedex)}
+	}catch(error){
+	res.status(500).send(error.message)
+	
+	}
+	
+	})
 
 router.post('/',async(req,res)=>{
 const{name,types,image,life_span,attack,defense,speed,height,weight} =req.body
@@ -93,6 +104,25 @@ weight
 // pokecreate.addTypes(associatedtypes)
 
 res.status(200).json(pokecreate)
+
+})
+
+
+router.get('/:id',async(req,res)=>{
+const{id}=req.params
+console.log(id)
+try{
+let pokedex = await allPokemons()
+let finder = pokedex.find(item => item.id == id)
+if(finder) return res.status(200).send(finder)
+else{res.status(404).send("pokemon not found")}
+}catch(error){
+
+res.status(500).send(error.message)
+
+}
+
+
 
 })
 
