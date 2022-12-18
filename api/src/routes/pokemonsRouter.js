@@ -71,8 +71,17 @@ let api = await getApiData()
 // })
 router.get('/',async(req,res)=>{
 	const{name}= req.query
+	const{origin} = req.query
 	try{
 		let pokedex = await allPokemons()
+		if(origin){
+          let api = await getApiData()
+		  let db = await getDbData()
+          
+         if(origin === "db") return res.status(200).send(db)
+         if(origin === "api") return res.status(200).send(api) 
+
+		}
 		if(name){
 		
 		let findname = pokedex.filter(item => item.name.toLowerCase().includes(name.toLowerCase()))

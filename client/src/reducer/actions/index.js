@@ -6,17 +6,21 @@ export const GET_TYPES = "GET_TYPES"
 export const GET_POKEMON_DETAILS = "GET_POKEMON_DETAILS"
 export const POKE_DB_OR_API = "POKE_DB_OR_API"
 export const ALPHABETIC_ORDER = "ALPHABETIC_ORDER"
-export const ATTACK_ORDER = "ATTACK_ORDER"
+export const ATTACK_FILTER = "ATTACK_ORDER"
 
 
 const getAllPokemons = () =>{
-let getAll = axios.get('localhost:3001/pokemons')
-return{ type: "GET_ALL_POKEMONS", payload: getAll}
+    return async  function(dispatch){
+let getAll = await axios.get('localhost:3001/pokemons')
+dispatch({ type: "GET_ALL_POKEMONS", payload: getAll}
+)}
 }
 
+const  searchPokemon = (name)=>{
 
-const  searchPokemon = (payload)=>{
-return{type: "SEARCH_POKEMON", payload: payload}
+    return async function (dispatch){
+        let pokefind = axios.get(`localhost:3001/pokemons?name=${name}`)
+dispatch({type: "SEARCH_POKEMON", payload: pokefind})}
 }
 
 const createPokemon = (payload) =>{
@@ -24,42 +28,50 @@ const createPokemon = (payload) =>{
     return async function(){
      let createpoke = await axios.post('localhost:3001/pokemons', payload)
      return createpoke
-
     }
 
 }
 
 const getTypes =() =>{
+
+    return async function(dispatch){
   let typesDb = axios.get('localhost:3001/pokemons') 
-  return{ type: "GET_TYPES", payload: typesDb}
-   
+ dispatch({ type: "GET_TYPES", payload: typesDb})
+    }
 }
 
 const getPokemonDetails = (id) =>{
-let pokeDetails = axios.get(`localhost:3001/pokemons/${id}`)
- return{ type:"GET_POKEMON_DETAILS", payload: pokeDetails}
+return async function (dispatch){
 
+let pokeDetails = axios.get(`localhost:3001/pokemons/${id}`)
+ dispatch({ type:"GET_POKEMON_DETAILS", payload: pokeDetails})
+}
 }
 
 const deletePokemon = (id) =>{
-    return{ type: DELETE_POKEMON, payload:id}
+    dispatch({ type: DELETE_POKEMON, payload:id})
 }
 
 const PokeDborApi = (payload) =>{
-return{
- type: "POKE_DB_OR_API", payload: payload
+    return async function(origin){
+          let origininfo = await axios.get(`localhost:3001/pokemons?origin=${origin}`)
 
-}
+        dispatch({
+            type: "POKE_DB_OR_API", payload: origininfo
+           
+           })
+        }
+
 }
 
 
 const alphabeticOrder = (order) =>{
-return{ type: "ALPHABETIC_ORDER", payload: order}
+dispatch({ type: "ALPHABETIC_ORDER", payload: order})
 
 }
 
-const attackOrder = (order) =>{
+const attackFilter = (order) =>{
 
-return{ type: "ATTACK_ORDER", payload: order}
+dispatch({ type: "ATTACK_FILTER", payload: order})
 
 }
