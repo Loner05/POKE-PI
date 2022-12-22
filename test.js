@@ -472,6 +472,6 @@ const dena = Object.entries(db)
 //  //console.log(dena)
 
 
- let finder = api.find(item => item.id == 2)
+ let finder = api.find(item => item.id == )
 
  console.log(finder)

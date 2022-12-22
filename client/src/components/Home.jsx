@@ -8,6 +8,7 @@ const Home = () =>{
 
 const dispatch = useDispatch()
 const pokemons = useSelector(state =>state.allPokemons)
+console.log(pokemons)
 useEffect(()=>{
 dispatch(getAllPokemons())
 
@@ -19,10 +20,10 @@ return(
 <div>
 <div>soy el home</div>
 {
-pokemons?.map(item =>
-<Pokecard img={item.img} name={item.name} type={item.type}/>
-
+pokemons?.map(item =>(
+<Pokecard img={item.img} name={item.name} type={item.type} id={item.id} key={item.name}/>)
 )
+
 }
 
 

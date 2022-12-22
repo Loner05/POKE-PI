@@ -37,8 +37,36 @@ const getApiData = async()=>{
 
 const getDbData = async()=>{
 try{
-let pokedb =await  Pokemon.findAll()
-return pokedb
+let db= await Pokemon.findAll({
+
+	include: {model: Types , 
+		attributes:['name']},
+
+
+})
+
+let normalizedb = await db.map( item =>{
+ let formatter = {
+  id: item.id,
+  name: item.name,
+  life: item.life,
+  attack: item.attack,
+  defense: item.defense,
+  speed: item.speed,
+  height: item.height,
+  weight: item.weight,
+  type: item.Types.map( type => type.name)
+
+
+
+ }
+ 
+  return formatter
+
+})
+
+return normalizedb
+
 }catch(error){ return error.message}
 
 
@@ -48,6 +76,7 @@ return pokedb
 const allPokemons = async() =>{
 
 let db  = await getDbData()
+
 let api = await getApiData()
  let merge = [...db,...api]
 
@@ -95,24 +124,24 @@ router.get('/',async(req,res)=>{
 	})
 
 router.post('/',async(req,res)=>{
-const{name,types,image,life_span,attack,defense,speed,height,weight} =req.body
+const{name,image,life,attack,defense,speed,height,weight,type} =req.body
 const pokecreate = await Pokemon.create({
 name,
 image,
-life_span,
+life,
 attack,
 defense,
 speed,
 height,
 weight
 })
-// let associatedtypes = await Types.findAll({
-//   where: { name: types}
+console.log("llegue a ruta de express post pokemon")
+console.log(type)
+let associatedtypes = await Types.findAll({
+where:{ name: type}
+})
 
-// })
-// pokecreate.addTypes(associatedtypes)
-
-res.status(200).json(pokecreate)
+pokecreate.addTypes(associatedtypes)
 
 })
 
@@ -139,3 +168,5 @@ res.status(500).send(error.message)
 
 
 module.exports = router
+
+

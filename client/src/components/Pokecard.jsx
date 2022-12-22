@@ -1,17 +1,18 @@
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 
-export default function Pokecard(img,name,type){
+export default function Pokecard({img,name,type,id}){
 
 
 return(
     <div>
    <img src={img} alt={name} />
-    <h1>{name}</h1>
+    <Link to={`/details/${id}`}><h1>{name}</h1></Link>
     {
-     type.map(item =>
-     <button>{item.name}</button>
+     type?.map(item =>
+     <button>{item}</button>
 
      )
 

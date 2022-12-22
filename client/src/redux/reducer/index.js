@@ -1,6 +1,6 @@
 
 
-import { ALPHABETIC_ORDER, ATTACK_FILTER, GET_ALL_POKEMONS, GET_POKEMON_DETAILS, GET_TYPES, POKE_DB_OR_API, SEARCH_POKEMON } from "../actions";
+import { ALPHABETIC_ORDER, ATTACK_FILTER, CLEAR_POKE_DETAILS, GET_ALL_POKEMONS, GET_POKEMON_DETAILS, GET_TYPES, POKE_DB_OR_API, SEARCH_POKEMON } from "../actions/index.js";
 
 const initialState ={
 allPokemons: [],
@@ -10,14 +10,21 @@ types:[]
 }
 
 
+export default function rootReducer(state= initialState, action){
 
-export default function rootReducer ( state= initialState, action){
-
-switch(action.type){
+    switch(action.type){
  case GET_ALL_POKEMONS:
+
     return{
      ...state,
-     allPokemons: action.payload
+     allPokemons: action.payload,
+     
+
+    }
+case CLEAR_POKE_DETAILS:
+    return{
+    ...state,
+     pokemonDetail: []
 
     }
 case GET_POKEMON_DETAILS:
