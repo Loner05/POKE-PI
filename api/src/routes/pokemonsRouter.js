@@ -20,6 +20,7 @@ const getApiData = async()=>{
 	 stadarization.push({
      id: pokemondata.id,
 	 name: pokemondata.name,
+	 attack: pokemondata.stats[1].base_stat,
 	 weight: pokemondata.weight,
 	 height: pokemondata.height,
 	 type: pokemondata.types.map(types => types.type.name),
@@ -109,7 +110,7 @@ router.get('/',async(req,res)=>{
           
          if(origin === "db") return res.status(200).send(db)
          if(origin === "api") return res.status(200).send(api) 
-
+         if(origin == "all")  return res.status(200).send(pokedex)
 		}
 		if(name){
 		

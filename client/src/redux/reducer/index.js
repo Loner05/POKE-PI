@@ -1,6 +1,6 @@
 
 
-import { ALPHABETIC_ORDER, ATTACK_FILTER, CLEAR_POKE_DETAILS, GET_ALL_POKEMONS, GET_POKEMON_DETAILS, GET_TYPES, POKE_DB_OR_API, SEARCH_POKEMON } from "../actions/index.js";
+import { ALPHABETIC_ORDER, TYPE_FILTER, ATTACK_FILTER, CLEAR_POKE_DETAILS, GET_ALL_POKEMONS, GET_POKEMON_DETAILS, GET_TYPES, POKE_DB_OR_API, SEARCH_POKEMON } from "../actions/index.js";
 
 const initialState ={
 allPokemons: [],
@@ -18,6 +18,7 @@ export default function rootReducer(state= initialState, action){
     return{
      ...state,
      allPokemons: action.payload,
+     pokemons: action.payload
      
 
     }
@@ -48,58 +49,89 @@ case SEARCH_POKEMON:
 
  }
 
-//  case ALPHABETIC_ORDER:
-// let filtered =
-//         action.payload == "A-Z" ?
-//         state.pokemons.sort( item =>
-//             if(a.name > b.name){
-//                 return 1;  
-//             }
-//             if(a.name < b.name){
-//                 return -1;  
-//             }
-            
-//             return 0
-//             )
-//          action.payload == "Z-A" ?
-//             if(a.name > b.name){
-//                 return -1;  
-//             }
-//             if(a.name < b.name){
-//                 return  1;  
-//             }
-            
-//             return 0
-
-        
-//     return{
-//     ...state,
-//     pokemons: filtered
-
-//     }
-
-case ATTACK_FILTER:
-    let filtered = []
-for(let i=0; i > state.pokemons.length; i++){
-    
-    let finded = state.pokemons[i].type.find(item => 
-       item === action.payload
-       
-    )
-   if(finded) { filtered.push(state.pokemons[i])}
-
+ case ALPHABETIC_ORDER:
+    console.log(`estoy en el reducer alpabethic ${action.payload}`)
+const filt = 
+action.payload == "A-Z" ?
+state.pokemons.sort((a,b)=>{
+if(a.name > b.name){
+    return 1;  
 }
-if(!filtered) {return "Isn't any pokemon of the selected type"}
+if(a.name < b.name){
+    return -1;  
+}
+
+return 0
+
+}) :  state.pokemons.sort((a,b)=>{
+    if(a.name > b.name){
+        return -1;  
+    }
+    if(a.name < b.name){
+        return  1;  
+    }
+    
+    return 0
+    
+    }) 
+        
     return{
-       ...state,
-       pokemons: filtered
+    ...state,
+    pokemons: filt
 
     }
+
+case ATTACK_FILTER:
+   let  filtradore = 
+    action.payload === "min-max" ?
+    state.pokemons.sort((a,b)=>{
+    if(a.attack> b.attack){
+        return 1;  
+    }
+    if(a.attack < b.attack){
+        return -1;  
+    }
+    
+    return 0
+    
+    }) :  state.pokemons.sort((a,b)=>{
+        if(a.attack> b.attack){
+            return -1;  
+        }
+        if(a.attack< b.attack){
+            return  1;  
+        }
+        
+        return 0
+        
+        }) 
+            
+        return{
+        ...state,
+        pokemons: filtradore
+    
+        }
    case POKE_DB_OR_API:
     return{
      ...state,
      pokemons: action.payload
     }
+    case TYPE_FILTER:
+        let typeselected = []
+        for(let i=0; i < state.allPokemons.length; i++){
+        state.allPokemons[i].type.map( item => {
+           if(item === action.payload){ 
+            typeselected.push(state.allPokemons[i])
+           }
+
+        })}
+        if(!typeselected){ return "Isn't any pokemon is this selected type!"}
+        return{
+      ...state,
+      pokemons: typeselected
+
+
+        }
     default: return{ ...state}
 
 

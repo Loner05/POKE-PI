@@ -9,6 +9,7 @@ export const ALPHABETIC_ORDER = "ALPHABETIC_ORDER"
 export const ATTACK_FILTER = "ATTACK_ORDER"
 export const DELETE_POKEMON = "DELETE_POKEMON"
 export const CLEAR_POKE_DETAILS = "CLEAR_POKE_DETAILS"
+export const TYPE_FILTER = "TYPE_FILTER"
 
 export function getAllPokemons (){
     return async function(dispatch){
@@ -61,29 +62,42 @@ export const deletePokemon = (id) => (dispatch) =>{
     dispatch({ type: DELETE_POKEMON, payload:id})
 }
 
-export const PokeDborApi = (payload) =>(dispatch)=>{
-    return async function(origin){
-          let origininfo = await axios.get(`http://localhost:3001/pokemons?origin=${origin}`)
+export const typeFilter = (poketype) =>{
 
-        dispatch({
-            type: POKE_DB_OR_API, payload: origininfo
-           
-           })
+return{type:TYPE_FILTER, payload: poketype}
+
+}
+
+export const PokeDborApi = (payload) =>{
+    return async function(dispatch){
+        console.log("estoy en action dborapi")
+        let origininfo = await axios.get(`http://localhost:3001/pokemons?origin=${payload}`)
+
+        return  dispatch({
+              type: POKE_DB_OR_API, payload: origininfo.data
+             
+             })
+
+
+        }
+         
         }
 
-}
 
 
-export const alphabeticOrder = (order) =>(dispatch)=>{
-dispatch({ type: ALPHABETIC_ORDER, payload: order})
 
-}
-
-export const attackFilter = (order) =>(dispatch)=>{
-
-dispatch({ type: ATTACK_FILTER, payload: order})
+export const alphabeticOrder = (order) =>{
+    console.log(`llegue al action ${order}`)
+return { type: ALPHABETIC_ORDER, payload: order}
 
 }
+
+export const attackFilter = (order) =>{
+
+return{ type: ATTACK_FILTER, payload: order}
+
+}
+
 
 export const clearPokeDetails = () =>{
  return {type: CLEAR_POKE_DETAILS}
