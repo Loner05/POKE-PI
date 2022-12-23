@@ -1,10 +1,25 @@
 .Home_maincontainer{
- background-image: url("../../media/background\ image\ detail.png");
- height: 120vh;
+ background-image: url("../../media/desktop-wallpaper-pokemon-anime-forest-background-pokemon-landscape.jpg");
+ height: 160vh;
  background-repeat: no-repeat;
  background-size: cover;    
  background-position-y: center;
 padding-top: 7%;
+
+
+}
+
+.contentContainer{
+display: flex;
+flex-direction: column;
+
+
+}
+
+.pagination{
+display: flex;
+align-self: center;
+justify-content: center;
 
 
 }

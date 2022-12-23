@@ -92,16 +92,19 @@
    .Form_buttonsubmit {
        -webkit-transition-duration: 0.4s; /* Safari */
        transition-duration: 0.4s;
+       background: linear-gradient(to right, rgb(163, 218, 150), rgb(42, 206, 169));
        width: 10rem;
-       height: 60px;
-       margin-top: 2%;
-       align-self: center;
-       background-color: transparent;
-       border: 2px solid black;
-       font-weight:300;
-       font-size: 1.5rem;
-       color: black;
-       border-radius: 15px;
+       height: 40px;
+        border: none;
+       border-radius: 20px;
+       color: white;
+       align-content: center;
+       text-align: center;
+       font-size: 18px;
+       font-family: sans-serif;
+       margin: 3px;
+       font-weight: 600;
+       margin-top: 10px;
    }
    
    .Form_buttonsubmit:hover {

@@ -1,6 +1,6 @@
 
 
-import { ALPHABETIC_ORDER, TYPE_FILTER, ATTACK_FILTER, CLEAR_POKE_DETAILS, GET_ALL_POKEMONS, GET_POKEMON_DETAILS, GET_TYPES, POKE_DB_OR_API, SEARCH_POKEMON } from "../actions/index.js";
+import { ALPHABETIC_ORDER,GET_POKEMON, TYPE_FILTER, ATTACK_FILTER, CLEAR_POKE_DETAILS, GET_ALL_POKEMONS, GET_POKEMON_DETAILS, GET_TYPES, POKE_DB_OR_API, SEARCH_POKEMON } from "../actions/index.js";
 
 const initialState ={
 allPokemons: [],
@@ -132,6 +132,14 @@ case ATTACK_FILTER:
 
 
         }
+
+        case GET_POKEMON:
+            return{
+         ...state,
+         pokemons: action.payload
+
+
+            }
     default: return{ ...state}
 
 

@@ -18,15 +18,19 @@
     }
      .Pagination_container ul li{
     
-        margin:0.2px
+        margin:3px
         } 
     .Pagination_button{
         
         background-color: white;
         font-size: large;
         color: darkslategrey;
-        margin: 1px
-        
+        margin: 1px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 30px;
+    
         }
     
     .Pagination_button:focus{

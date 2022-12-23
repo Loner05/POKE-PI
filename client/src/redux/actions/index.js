@@ -10,7 +10,7 @@ export const ATTACK_FILTER = "ATTACK_ORDER"
 export const DELETE_POKEMON = "DELETE_POKEMON"
 export const CLEAR_POKE_DETAILS = "CLEAR_POKE_DETAILS"
 export const TYPE_FILTER = "TYPE_FILTER"
-
+export const GET_POKEMON ="GET_POKEMON"
 export function getAllPokemons (){
     return async function(dispatch){
 //  fetch('http://localhost:3001/pokemons')
@@ -102,5 +102,15 @@ return{ type: ATTACK_FILTER, payload: order}
 export const clearPokeDetails = () =>{
  return {type: CLEAR_POKE_DETAILS}
 
+
+}
+
+export const getpokemon = (name) =>{
+    console.log("estoy en el action de getpokemoon")
+    console.log(name)
+return async function (dispatch){
+let getpoke = await axios.get(`http://localhost:3001/pokemons?name=${name}`)
+return dispatch({type: GET_POKEMON, payload: getpoke.data})
+}
 
 }
