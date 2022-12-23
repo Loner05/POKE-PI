@@ -1,0 +1,10 @@
+.Home_maincontainer{
+ background-image: url("../../media/background\ image\ detail.png");
+ height: 120vh;
+ background-repeat: no-repeat;
+ background-size: cover;    
+ background-position-y: center;
+padding-top: 7%;
+
+
+}

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { alphabeticOrder, attackFilter, getAllPokemons,getTypes,PokeDborApi, typeFilter } from "../redux/actions";
 import Pagination from "./Pagination";
 import Pokecard from "./Pokecard";
-
+import style from "./StyleComponents/Home.module.css"
 
 const Home = () =>{
 
@@ -54,8 +54,8 @@ setOrden(e.target.value)
 
 }
 return(
-<div>
-<div>soy el home</div>
+<div className={style.Home_maincontainer}>
+
 <div>
 
 <select  onChange={handleOrigin}>

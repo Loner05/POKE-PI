@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPokemon ,getTypes} from "../redux/actions";
-
+import style from "./StyleComponents/CreatePokemon.module.css"
 
 export default function CreatePokemon(){
 const initialState ={
@@ -78,42 +78,43 @@ Setform({ ...form, type: form.type.filter(types=> types !== item )})
  }
 
 return(
-
 <div>
-<form onSubmit={handleSubmit}>
-<div>
-    <label>Name:</label>
-    <input value={form.name} name="name" onChange={handleChange}/>
+<div className={style.Container}>
+<div className={style.Formcard}>
+<form  className={style.Form} onSubmit={handleSubmit}>
+<div className={style.Form_labelinputs}>
+    <label >Name:</label>
+    <input   className={style.Form_inputs} value={form.name} name="name" onChange={handleChange}/>
     {errors.name && <div>{errors.name}</div> }
 </div>
-<div>
-    <label>Life:</label>
-    <input value={form.life} name="life" onChange={handleChange}/>
+<div className={style.Form_labelinputs}>
+    <label >Life:</label>
+    <input   className={style.Form_inputs} value={form.life} name="life" onChange={handleChange}/>
     {errors.life && <div>{errors.life}</div> }
 </div>
-<div>
-    <label>Attack:</label>
-    <input value={form.attack} name="attack" onChange={handleChange}/>
+<div className={style.Form_labelinputs}>
+    <label >Attack:</label>
+    <input  className={style.Form_inputs} value={form.attack} name="attack" onChange={handleChange}/>
     {errors.attack&& <div>{errors.attack}</div> }
 </div>
-<div>
+<div className={style.Form_labelinputs}>
     <label>Defense:</label>
-    <input value={form.defense} name="defense" onChange={handleChange}/>
+    <input  className={style.Form_inputs}  className={style.Form_inputs} value={form.defense} name="defense" onChange={handleChange}/>
     {errors.defense && <div>{errors.defense}</div> }
 </div>
-<div>
-    <label>Speed:</label>
-    <input value={form.speed} name="speed" onChange={handleChange}/>
+<div className={style.Form_labelinputs}>
+    <label >Speed:</label>
+    <input   className={style.Form_inputs}  className={style.Form_inputs} value={form.speed} name="speed" onChange={handleChange}/>
     {errors.speed && <div>{errors.speed}</div> }
 </div>
-<div>
-    <label>Height:</label>
-    <input value={form.height} name="height" onChange={handleChange}/>
+<div className={style.Form_labelinputs}>
+    <label >Height:</label>
+    <input  className={style.Form_inputs}  className={style.Form_inputs} value={form.height} name="height" onChange={handleChange}/>
     {errors.height && <div>{errors.height}</div> }
 </div>
-<div>
-    <label>Weight:</label>
-    <input value={form.weight} name="weight" onChange={handleChange}/>
+<div className={style.Form_labelinputs}>
+    <label >Weight:</label>
+    <input  className={style.Form_inputs} value={form.weight} name="weight" onChange={handleChange}/>
     {errors.weight && <div>{errors.weight}</div> }
 </div>
 <select  onClick={handleSelectedtype}>
@@ -129,27 +130,30 @@ return(
 </select>
 
 
-<button type= "submit">Create Pokemon</button>
 
 
-</form>
 
-<div>
+
+
+<div  className={style.temperamentsArrow}>
 {
  form.type?.map(type =>(
     <div key={type+Math.random()} onClick={()=>handleDelete(type)}>
-  <button>{type} X</button>
+  <button className={style.Form_buttontemp}>{type} X</button>
   </div>
  ))
 
 
 }
+</div>
+<button className={style.Form_buttonsubmit} type= "submit">Create Pokemon</button>
+</form>
 
 
 </div>
 
 
-
+</div>
 </div>
 )
 

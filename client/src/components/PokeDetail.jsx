@@ -19,8 +19,8 @@ return(
 <div>
 <img src={details.img}/>
 <h1>{details.name}</h1>
-<h2>weight: {details.weight}</h2>
-<h2>height: {details.height}</h2>
+<h2>weight: {details.weight}kg </h2>
+<h2>height: {details.height} cm</h2>
 <h2>attack: {details.attack}</h2>
 <div>
     <h2>Types</h2>

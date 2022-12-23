@@ -7,7 +7,6 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <div className="App">
-      <h1>Henry Pokemrrron</h1>
       <Route exact path={'/home'}><Navbar/><Home/></Route>
       <Route exact path={"/details/:id"}><Navbar/><PokeDetail/></Route>
        <Route exact path={'/createpokemon'}><Navbar/><CreatePokemon/></Route>
