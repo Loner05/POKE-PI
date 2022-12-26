@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { alphabeticOrder, attackFilter, getAllPokemons,getTypes,PokeDborApi, typeFilter } from "../redux/actions";
+import { alphabeticOrder, attackFilter, getAllPokemons,getTypes,PokeDborApi, setLoading, typeFilter } from "../redux/actions";
+import Loader from "./Loader";
+import Message from "./Message";
 import Pagination from "./Pagination";
 import Pokecard from "./Pokecard";
 import SearchBar from "./Search";
@@ -14,13 +16,18 @@ const pokeTypes= useSelector(state => state.types)
 const[currentPage,setCurrentPage]= useState(1);
 const pokemonsPerPage = 12;
 const[Orden,setOrden]= useState("")
-console.log(pokemons)
+const[error,setError] = useState(null)
+
 useEffect(()=>{
+   
 dispatch(getAllPokemons())
 dispatch(getTypes())
+dispatch(setLoading(true))
+
 
 }, [dispatch])
 
+const loading = useSelector(state => state.loading)
 const indexOfLastPokemonPost = currentPage - pokemonsPerPage;
 const indexOfFirstPokemonPost = indexOfLastPokemonPost - pokemonsPerPage;
 const lastPokemonIndex = currentPage * pokemonsPerPage
@@ -57,6 +64,7 @@ setOrden(e.target.value)
 return(
 <div className={style.Home_maincontainer}>
 
+{error&&<Message/>}
 <div className={style.contentContainer}>
 <SearchBar/>
 <div>
@@ -90,9 +98,12 @@ return(
 
     </select>
 </div>
+{
+loading&&<Loader/>
+}
 <div className={style.cardsGrid}>
 {
-currentCardsPage?.map(item =>(
+currentCardsPage && currentCardsPage?.map(item =>(
 <Pokecard img={item.img} name={item.name} type={item.type} id={item.id} key={item.name} attack={item.attack}/>)
 )
 
@@ -101,7 +112,6 @@ currentCardsPage?.map(item =>(
 <div className={style.pagination}>
 <Pagination cardsPerPage={pokemonsPerPage} totalCards={pokemons.length} paginate={paginate}/>
 </div>
-
 </div>
 
 </div>

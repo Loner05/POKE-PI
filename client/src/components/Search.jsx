@@ -7,8 +7,8 @@ import logo from "../media/search-logo.png"
 
 
 const SearchBar = () =>{
-    let clean = []
-    const[input,setInput] = useState(clean)
+    
+    const[input,setInput] = useState("")
     const dispatch = useDispatch()
     const handleChange = (e) =>{
          console.log(input)
@@ -22,7 +22,7 @@ return(
     <div className={style.Searchcontainer}>
     <div className={style.input_wrapper} >
       <input className={style.SearchBar_inputsearch} type="text" placeholder="Search" onChange={handleChange}/>
-      <img className={style.SearchBar_inputlogo} src={logo} alt="" />
+     <img className={style.SearchBar_inputlogo} src={logo} alt="" />
     </div>
     </div>
 )

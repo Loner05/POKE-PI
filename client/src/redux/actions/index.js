@@ -11,6 +11,7 @@ export const DELETE_POKEMON = "DELETE_POKEMON"
 export const CLEAR_POKE_DETAILS = "CLEAR_POKE_DETAILS"
 export const TYPE_FILTER = "TYPE_FILTER"
 export const GET_POKEMON ="GET_POKEMON"
+export const SET_LOADING = "SET_LOADING"
 export function getAllPokemons (){
     return async function(dispatch){
 //  fetch('http://localhost:3001/pokemons')
@@ -27,7 +28,7 @@ export const  searchPokemon = (name)=>{
 
     return async function (dispatch){
         let pokefind = axios.get(`http://localhost:3001/pokemons?name=${name}`)
-dispatch({type: SEARCH_POKEMON, payload: pokefind})}
+return dispatch({type: SEARCH_POKEMON, payload: pokefind.data})}
 }
 
 export const createPokemon = (payload) =>{
@@ -114,3 +115,9 @@ return dispatch({type: GET_POKEMON, payload: getpoke.data})
 }
 
 }
+
+export const setLoading = (payload) =>{
+    return {type: SET_LOADING, payload: payload}
+   
+   
+   }

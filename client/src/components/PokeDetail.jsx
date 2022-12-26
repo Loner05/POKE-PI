@@ -1,24 +1,34 @@
 
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { clearPokeDetails, getPokemonDetails } from "../redux/actions";
+import { clearPokeDetails, getPokemonDetails, setLoading } from "../redux/actions";
+import Loader from "./Loader";
 import style from './StyleComponents/PokeDetail.module.css'
 
 export default function PokeDetail() {
 const dispatch = useDispatch()
-
+const [detail,setDetail] = useState(null)
 const {id} = useParams()
+const details = useSelector(state => state.pokemonDetail)
+const loading = useSelector(state =>  state.loading)
 useEffect(()=>{
     dispatch(clearPokeDetails())
     dispatch(getPokemonDetails(id))
+    dispatch(setLoading(true))
 },[dispatch,id])
-const details = useSelector(state => state.pokemonDetail)
+
+
 return(
+   
 <div className={style.landscape_bigbox}>  
-            
-        <div className={style.cardDetail}>
+{
+loading&&<Loader/>
+}
+{
+   !loading&&
+<div className={style.cardDetail}>
             <div className={style.imgContainer}>
         <img className={style.imgpoke} src={details.img} alt={details.name} />
            </div>
@@ -50,10 +60,10 @@ return(
         </div>
 
 
+    
 
-
-        </div>
+        </div>}
 </div>  
 
-)
-}
+)}
+

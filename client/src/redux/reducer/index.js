@@ -1,8 +1,9 @@
 
 
-import { ALPHABETIC_ORDER,GET_POKEMON, TYPE_FILTER, ATTACK_FILTER, CLEAR_POKE_DETAILS, GET_ALL_POKEMONS, GET_POKEMON_DETAILS, GET_TYPES, POKE_DB_OR_API, SEARCH_POKEMON } from "../actions/index.js";
+import { SET_LOADING,ALPHABETIC_ORDER,GET_POKEMON, TYPE_FILTER, ATTACK_FILTER, CLEAR_POKE_DETAILS, GET_ALL_POKEMONS, GET_POKEMON_DETAILS, GET_TYPES, POKE_DB_OR_API, SEARCH_POKEMON } from "../actions/index.js";
 
 const initialState ={
+    loading: false,
 allPokemons: [],
 pokemons: [],
 pokemonDetail: [],
@@ -17,22 +18,22 @@ export default function rootReducer(state= initialState, action){
 
     return{
      ...state,
-     allPokemons: action.payload,
-     pokemons: action.payload
      
+     pokemons: action.payload,
+     loading: false,
 
     }
 case CLEAR_POKE_DETAILS:
     return{
     ...state,
-     pokemonDetail: []
-
+     pokemonDetail: [],
+    
     }
 case GET_POKEMON_DETAILS:
     return{
      ...state,
-     pokemonDetail: action.payload
-
+     pokemonDetail: action.payload,
+     loading: false
 
     }
 
@@ -42,7 +43,7 @@ return{
 types: action.payload
 
 }
-case SEARCH_POKEMON:
+case GET_POKEMON:
  return{
  ...state,
  pokemons: action.payload
@@ -132,14 +133,13 @@ case ATTACK_FILTER:
 
 
         }
-
-        case GET_POKEMON:
-            return{
+        case SET_LOADING:
+        return{
          ...state,
-         pokemons: action.payload
+         loading: action.payload
 
+        }
 
-            }
     default: return{ ...state}
 
 
