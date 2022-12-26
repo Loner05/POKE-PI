@@ -18,7 +18,7 @@ export default function rootReducer(state= initialState, action){
 
     return{
      ...state,
-     
+     allPokemons: action.payload,
      pokemons: action.payload,
      loading: false,
 
@@ -126,6 +126,7 @@ case ATTACK_FILTER:
            }
 
         })}
+        console.log(typeselected)
         if(!typeselected){ return "Isn't any pokemon is this selected type!"}
         return{
       ...state,

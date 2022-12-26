@@ -1,7 +1,7 @@
 import React from "react";
 
 import style from './StyleComponents/Pagination.module.css'
-const Pagination = ({ cardsPerPage, totalCards, paginate }) => {
+const Pagination = ({ cardsPerPage, totalCards, paginate ,current}) => {
   const pageNumbers = [];
 console.log(`soy pagenumber ${pageNumbers}`)
   for (let i = 1; i <= Math.ceil(totalCards / cardsPerPage); i++) {
@@ -13,8 +13,9 @@ console.log(`soy pagenumber ${pageNumbers}`)
       <ul className='pagination'>
         {pageNumbers.map(number => (
           <li onClick={() => paginate(number)} key={number}  >
-                     <button className={style.Pagination_button}type="button">{number}</button> 
+                     <button className={ current === number ? style.Pagination_buttonActive : style.Pagination_button}type="button">{number}</button> 
           </li>
+         
         ))}
       </ul>
     </nav>

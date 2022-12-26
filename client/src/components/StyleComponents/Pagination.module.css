@@ -34,10 +34,27 @@
         }
     
     .Pagination_button:focus{
-    border: 5px blue  solid ;
+    border: 5px darkslategray  solid ;
     font-size: large;
     
     
     text-align: center;
     align-content: center;
     }
+
+.Pagination_buttonActive{
+
+    background-color: darkslategrey;
+    font-size: large;
+    color: white;
+    margin: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 30px;
+
+
+
+
+
+}

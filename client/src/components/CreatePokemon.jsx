@@ -67,7 +67,7 @@ setErrors(err)
 const handleSelectedtype = (e) =>{
 
 e.preventDefault()
-if(!form.type.includes(e.target.value)){
+if(!form.type.includes(e.target.value) && e.target.value !== "select type"){
     Setform({...form, type: [...form.type, e.target.value]})
 }
 }
@@ -118,7 +118,7 @@ return(
     {errors.weight && <div>{errors.weight}</div> }
 </div>
 <select  onClick={handleSelectedtype}>
-<option value="">select type</option>
+<option selected disabled defaultValue >select type</option>
 {
  poketypes?.map( item =>(
   <option key={item}>{item}</option>

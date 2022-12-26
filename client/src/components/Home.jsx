@@ -45,7 +45,7 @@ dispatch( PokeDborApi(e.target.value))
 const handleTypeFilter = (e) =>{
 e.preventDefault()
 dispatch(typeFilter(e.target.value))
-
+setCurrentPage(1)
 }
 
 const handleAZ = (e) =>{
@@ -110,7 +110,7 @@ currentCardsPage && currentCardsPage?.map(item =>(
 }
 </div>
 <div className={style.pagination}>
-<Pagination cardsPerPage={pokemonsPerPage} totalCards={pokemons.length} paginate={paginate}/>
+<Pagination cardsPerPage={pokemonsPerPage} totalCards={pokemons.length} paginate={paginate} current={currentPage}/>
 </div>
 </div>
 
