@@ -1,0 +1,27 @@
+.Messagecontainer{
+     display: flex;
+     flex-direction: column;
+    width: 60%;
+    background-color: white;
+    height: auto;
+    justify-content: center;
+   align-items: center;
+   border-radius: 15px;
+   margin-top: 10%;
+   align-self: center;
+   color: rgb(85, 80, 80);
+   font-weight: 600;
+   font-size: 25px;
+   padding-top: 20px;
+   padding-bottom: 25px;
+}
+
+.pikachuimg{
+padding-top: 30px;
+width: 100px;
+}
+
+.text{
+margin-top: 3%;
+
+}

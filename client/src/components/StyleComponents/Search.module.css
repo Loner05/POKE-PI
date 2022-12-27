@@ -3,6 +3,9 @@
     display: flex;
     justify-content: center;
     padding-bottom: 30px;
+    padding-top: 10%px;
+  
+    top: 15px
     
     }
      
@@ -10,10 +13,10 @@
      
      
      .input_wrapper {
-        position: relative;
+        position:relative;
         width: 600px;
-        align-items: center;
         
+      
       }
       
     

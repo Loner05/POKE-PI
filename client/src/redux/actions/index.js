@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+
 export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS'
 export const SEARCH_POKEMON   = "SEARCH_POKEMON"
 export const GET_TYPES = "GET_TYPES"
@@ -72,8 +73,8 @@ return{type:TYPE_FILTER, payload: poketype}
 export const PokeDborApi = (payload) =>{
     return async function(dispatch){
         console.log("estoy en action dborapi")
+        try{
         let origininfo = await axios.get(`http://localhost:3001/pokemons?origin=${payload}`)
-
         return  dispatch({
               type: POKE_DB_OR_API, payload: origininfo.data
              
@@ -81,8 +82,8 @@ export const PokeDborApi = (payload) =>{
 
 
         }
-         
-        }
+         catch(error){return dispatch({type: POKE_DB_OR_API, payload: {error: error.response.data}})}
+     } }
 
 
 
@@ -110,8 +111,10 @@ export const getpokemon = (name) =>{
     console.log("estoy en el action de getpokemoon")
     console.log(name)
 return async function (dispatch){
+    try{
 let getpoke = await axios.get(`http://localhost:3001/pokemons?name=${name}`)
-return dispatch({type: GET_POKEMON, payload: getpoke.data})
+return dispatch({type: GET_POKEMON, payload: getpoke.data})}
+catch(error){return dispatch({type: GET_POKEMON, payload: {error: error.response.data}})}
 }
 
 }

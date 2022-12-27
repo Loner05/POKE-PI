@@ -3,6 +3,7 @@
 import { SET_LOADING,ALPHABETIC_ORDER,GET_POKEMON, TYPE_FILTER, ATTACK_FILTER, CLEAR_POKE_DETAILS, GET_ALL_POKEMONS, GET_POKEMON_DETAILS, GET_TYPES, POKE_DB_OR_API, SEARCH_POKEMON } from "../actions/index.js";
 
 const initialState ={
+    error: null,
     loading: false,
 allPokemons: [],
 pokemons: [],
@@ -44,10 +45,19 @@ types: action.payload
 
 }
 case GET_POKEMON:
+    if(action.payload.error)
+     return{
+        ...state,
+        error: action.payload.error,
+        loading: false
+     }
+
+    
  return{
  ...state,
- pokemons: action.payload
-
+ pokemons: action.payload,
+  error: null,
+  loading: false
  }
 
  case ALPHABETIC_ORDER:
@@ -113,9 +123,16 @@ case ATTACK_FILTER:
     
         }
    case POKE_DB_OR_API:
+    if(action.payload.error)
+     return{
+        ...state,
+        error: action.payload.error,
+        loading: false
+     }
     return{
      ...state,
-     pokemons: action.payload
+     pokemons: action.payload,
+     loading: false
     }
     case TYPE_FILTER:
         let typeselected = []
@@ -126,19 +143,22 @@ case ATTACK_FILTER:
            }
 
         })}
-        console.log(typeselected)
-        if(!typeselected){ return "Isn't any pokemon is this selected type!"}
+       
+        if(!typeselected.length) return{
+            ...state,
+            loading: false,
+            error:"Isn't any pokemon with the selected type!"}
         return{
       ...state,
-      pokemons: typeselected
-
+      pokemons: typeselected,
+       error: null
 
         }
         case SET_LOADING:
         return{
          ...state,
-         loading: action.payload
-
+        loading: true,
+        error: null
         }
 
     default: return{ ...state}

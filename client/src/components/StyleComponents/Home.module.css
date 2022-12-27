@@ -5,7 +5,10 @@
  background-size: cover;    
  background-position-y: center;
 padding-top: 7%;
-
+ display: flex;
+ align-content: center;
+ justify-items: center;
+ justify-content: center;
 
 
 }
@@ -22,5 +25,29 @@ display: flex;
 align-self: center;
 justify-content: center;
 
+
+}
+
+
+.cardsGrid{
+width: 92%;
+align-self: center;
+
+
+
+}
+
+
+.searchfilterbox{
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.filters{
+display:flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: center;
 
 }

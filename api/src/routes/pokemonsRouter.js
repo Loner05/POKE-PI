@@ -56,8 +56,8 @@ let normalizedb = await db.map( item =>{
   speed: item.speed,
   height: item.height,
   weight: item.weight,
-  type: item.Types.map( type => type.name)
-
+  type: item.Types.map( type => type.name),
+  img: item.img
 
 
  }
@@ -108,17 +108,19 @@ router.get('/',async(req,res)=>{
           let api = await getApiData()
 		  let db = await getDbData()
           
-         if(origin === "db") return res.status(200).send(db)
-         if(origin === "api") return res.status(200).send(api) 
-         if(origin == "all")  return res.status(200).send(pokedex)
-		}
+         if(origin === "db") {
+		if(db.length){return  res.status(200).send(db)} else{return res.status(404).send("Isn't any Pokemon on the database yet.")}
+		if(origin === "api") {
+			api.length ? res.status(200).send(api) :  res.status(404).send("We haven't received any Pokemon from the API")} 
+         if(origin === "all")  return res.status(200).send(pokedex)
+		}}
 		if(name){
 		
 		let findname = pokedex.filter(item => item.name.toLowerCase().includes(name.toLowerCase()))
-	findname.length ? res.status(200).send(findname) : res.status(404).send("Pokemon not found!")
+	findname.length ? res.status(200).send(findname) :  res.status(404).send("Pokemon not found.")
 		} else{ res.status(200).send(pokedex)}
 	}catch(error){
-	res.status(500).send(error.message)
+	res.send(error)
 	
 	}
 	
@@ -126,6 +128,7 @@ router.get('/',async(req,res)=>{
 
 router.post('/',async(req,res)=>{
 const{name,image,life,attack,defense,speed,height,weight,type} =req.body
+const img = "https://i.imgur.com/FaQCkrU.png"
 const pokecreate = await Pokemon.create({
 name,
 image,
@@ -134,7 +137,8 @@ attack,
 defense,
 speed,
 height,
-weight
+weight,
+img
 })
 console.log("llegue a ruta de express post pokemon")
 console.log(type)

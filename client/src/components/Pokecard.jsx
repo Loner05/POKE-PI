@@ -13,7 +13,8 @@ return(
     <Link to={`/details/${id}`}><h1>{name}</h1></Link>
     <h3>Attack: {attack}</h3>
     {
-     type?.map(item =>
+      
+      type?.slice(0,2).map(item =>
      <button className={style.type_Buttons}>{item}</button>
 
      )

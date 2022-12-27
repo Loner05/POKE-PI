@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     life:{
-     type: DataTypes.STRING,
+     type: DataTypes.INTEGER,
      allowNull: true
     },
     attack: {
@@ -39,6 +39,10 @@ module.exports = (sequelize) => {
     type: DataTypes.INTEGER,
     allowNull: true
 
+    },
+    img: {
+      type: DataTypes.STRING,
+      allowNull: false,
     }
   });
 };

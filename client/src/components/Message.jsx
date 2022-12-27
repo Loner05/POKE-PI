@@ -1,10 +1,11 @@
 import React from "react";
-
-
-const Message = () =>{
+import style from "./StyleComponents/Message.module.css"
+import pikachuquest from "../media/PikachuConfused.png"
+const Message = ({text}) =>{
 return(
-<div>
-<h2>Message</h2>
+<div className={style.Messagecontainer}>
+<img className={style.pikachuimg} src={pikachuquest} alt={pikachuquest} />
+<p className={style.text}>{text}</p>
 
 </div>
 )

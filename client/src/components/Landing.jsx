@@ -2,9 +2,22 @@
 import { Link } from 'react-router-dom';
 import style from './StyleComponents/Landing.module.css';
 import pokeball_open from '../media/pokeball_landing.png'
+import { getAllPokemons, getTypes, setLoading } from '../redux/actions';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 
 const Landing = ()=>{
+
+    const dispatch = useDispatch()
+    useEffect(()=>{
+   
+        dispatch(getAllPokemons())
+        dispatch(getTypes())
+        dispatch(setLoading(true))
+        
+        
+        }, [dispatch])
 
 return(
 

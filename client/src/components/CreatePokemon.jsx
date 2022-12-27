@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createPokemon ,getTypes} from "../redux/actions";
+import { createPokemon ,getAllPokemons,getTypes, setLoading} from "../redux/actions";
 import style from "./StyleComponents/CreatePokemon.module.css"
-
+import pikasilueta from "../media/pikasilueta.png"
 export default function CreatePokemon(){
 const initialState ={
 name: '',
@@ -12,8 +12,8 @@ defense: '',
 speed: '',
 height: '',
 weight: '',
-type: []
-
+type: [],
+img: pikasilueta
 
 }
 
@@ -29,8 +29,8 @@ const poketypes = useSelector(state => state.types)
 const Validate = (form) =>{
 
     let errors = {}
-    let regexName =  /^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/
-    let regexlife =  /[0-9]{1,2}(-[0-9]{1,2})/
+    let regexName =  /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
+    let regexlife =  /[0-9]{1,2}/
     if(!form.name.trim()){
     errors.name = "Name is required!"}
     else if(!regexName.test(form.name)){
@@ -59,8 +59,12 @@ const err = Validate(form)
 setErrors(err)
     if(Object.keys(err).length === 0){
     dispatch(createPokemon(form))
+    dispatch(getAllPokemons())
+    dispatch(setLoading(true))
     alert("Pokemon was created successfully!")
     Setform(initialState)
+
+
     }
 }
 
